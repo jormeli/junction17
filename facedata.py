@@ -58,7 +58,7 @@ class Spotting(object):
         buffer = io.BytesIO()
         self.picture.save(buffer, format="JPEG", )
         buffer.seek(0)
-        return binascii.b2a_base64(buffer.read())
+        return binascii.b2a_base64(buffer.read()).decode('ascii')
 
     def tojson(self):
         return {
