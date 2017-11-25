@@ -3,8 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
   componentWillMount() {
-    fetch('/api/index', {headers: {'Accept': 'application/json'}}).then((response) => {
+    fetch('/api/uniques', {headers: {'Accept': 'application/json'}}).then((response) => {
       response.json().then((json) => {
         console.log(json);
         this.setState({
@@ -14,15 +18,20 @@ class App extends Component {
     })
   }
   render() {
+    var title;
+    if (this.state.facedata) {
+      title = <h1>{ this.state.facedata.uniques } unique visitors today.</h1>;
+    } else {
+      title = <h1>Loading...</h1>;
+    }
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+        <header>
+          <h2>Peopletracker</h2>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div class="container">
+          {title}
+        </div>
       </div>
     );
   }

@@ -1,5 +1,7 @@
 import sqlite3
 import io
+import base64
+import binascii
 from datetime import datetime
 import numpy as np
 from PIL import Image
@@ -7,6 +9,7 @@ from annoy import AnnoyIndex
 from scipy.spatial.distance import cosine
 from sklearn import cluster
 from sklearn import metrics
+
 
 IMAGE_SIZE = (128, 128)
 GET_N = 1000
@@ -51,11 +54,25 @@ class Spotting(object):
             image_blob,
             self.location)
 
+    def encode_picture(self):
+        buffer = io.BytesIO()
+        self.picture.save(buffer, format="JPEG", )
+        buffer.seek(0)
+        return binascii.b2a_base64(buffer.read())
+
+    def tojson(self):
+        return {
+        'id': self.dbid,
+        'picture': self.encode_picture(),
+        'spotted_at': self.spotted_at,
+        'location': self.location
+        }
+
     @classmethod
     def fromdata(cls, data):
         vector = np.load(io.BytesIO(data[2]))
         image = Image.frombytes('RGB', IMAGE_SIZE, data[5])
-        return cls(data[0], vector, data[3], data[4], image, data[5])
+        return cls(data[0], vector, data[3], data[4], image, data[6])
 
 class FaceData(object):
     def __init__(self):
@@ -99,12 +116,22 @@ class FaceData(object):
         # builds the annoy index. After building searches can be made, no more items can be added.
         self.annoy_index.build(10)
 
-    def count_uniques(self):
-        vectors = np.stack([f.vector for f in self.getall()])
+    def by_people(self):
+        all_items = self.getall()
+        vectors = np.stack([f.vector for f in all_items])
         dbscan = cluster.DBSCAN(eps=SIMILARITY_CUTOFF, metric='precomputed')
         dima = metrics.pairwise.cosine_distances(vectors)
         labels = dbscan.fit_predict(dima)
-        return max(labels)
+        grouped = {}
+        for i, label in enumerate(labels):
+            if grouped.get(label, None) is None:
+                grouped[label] = []
+            grouped[label].append(all_items[i])
+        return grouped
+
+    def count_uniques(self):
+        return len(self.by_people.keys())
+
 
 def create_dummy(i):
     vector = np.random.randn(128)
