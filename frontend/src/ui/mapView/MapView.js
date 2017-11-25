@@ -21,7 +21,7 @@ class MapView extends Component {
         return (
             <div className="map-wrapper">
                 <div className="map-left-column">
-                    <img className="map-image" src={require('../../resources/images/junction_map.png')} />
+                    <img className="map-image" src={require('../../resources/images/junction_map.png')} alt="kartta" />
                     <div className="map-camera-points">
                         {
                             cameras.map((camera) => (
@@ -59,16 +59,5 @@ class MapView extends Component {
         );
     }
 }
-
-const styles = {
-    camera1: {
-        top: 408,
-        left: 313,
-    },
-    camera2: {
-        top: 368,
-        left: 1068,
-    },
-};
 
 export default MapView;
