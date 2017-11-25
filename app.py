@@ -6,6 +6,11 @@ app = Flask(__name__)
 face_data = FaceData()
 face_data.build()
 
+def jsonify_grouped(grouped):
+    json = {}
+    for key in grouped.keys():
+        json[str(key)] = [i.tojson() for i in grouped[key]]
+    return json
 
 @app.route('/api/uniques')
 def index():
@@ -22,7 +27,9 @@ def spottings():
 @app.route('/api/people')
 def people():
     grouped = face_data.by_people()
-    json = {}
-    for key in grouped.keys():
-        json[str(key)] = [i.tojson() for i in grouped[key]]
-    return flask.json.jsonify(json)
+    return flask.json.jsonify(jsonify_grouped(grouped))
+
+@app.route('/api/location/<location>')
+def by_location(location):
+    grouped = face_data.grouped_by_location(location)
+    return flask.json.jsonify(jsonify_grouped(grouped))

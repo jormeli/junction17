@@ -13,7 +13,7 @@ from sklearn import metrics
 
 IMAGE_SIZE = (128, 128)
 GET_N = 1000
-SIMILARITY_CUTOFF = 0.1
+SIMILARITY_CUTOFF = 0.85
 
 class Spotting(object):
     def __init__(self, dbid, # int
@@ -112,13 +112,17 @@ class FaceData(object):
         items = cursor.execute("SELECT * FROM spotting;")
         return [Spotting.fromdata(data) for data in items]
 
+    def find_by_location(self, location):
+        cursor = self.connection.cursor()
+        items = cursor.execute("SELECT * FROM spotting WHERE location=(?);", (location,))
+        return [Spotting.fromdata(data) for data in items]
+
     def build(self):
         # builds the annoy index. After building searches can be made, no more items can be added.
         self.annoy_index.build(10)
 
-    def by_people(self):
-        all_items = self.getall()
-        vectors = np.stack([f.vector for f in all_items])
+    def group(self, items):
+        vectors = np.stack([i.vector for i in items])
         dbscan = cluster.DBSCAN(eps=SIMILARITY_CUTOFF, metric='precomputed')
         dima = metrics.pairwise.cosine_distances(vectors)
         labels = dbscan.fit_predict(dima)
@@ -126,11 +130,21 @@ class FaceData(object):
         for i, label in enumerate(labels):
             if grouped.get(label, None) is None:
                 grouped[label] = []
-            grouped[label].append(all_items[i])
+            grouped[label].append(items[i])
+        return grouped
+
+    def by_people(self):
+        all_items = self.getall()
+        grouped = self.group(all_items)
         return grouped
 
     def count_uniques(self):
-        return len(self.by_people.keys())
+        return len(self.by_people().keys())
+
+    def grouped_by_location(self, location):
+        items = self.find_by_location(location)
+        grouped = self.group(items)
+        return grouped
 
 
 def create_dummy(i):
