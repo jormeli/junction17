@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { nameToPos } from '../../utilities/cameraFunctions';
 
 import PersonList from '../common/personList';
 
@@ -9,13 +10,27 @@ class MapView extends Component {
     }
 
     render() {
+
+        const cameras = [
+            {
+                name: 'test',
+                position: nameToPos('Test'),
+            },
+        ];
+
         return (
             <div className="map-wrapper">
                 <div className="map-left-column">
                     <img className="map-image" src={require('../../resources/images/junction_map.png')} />
                     <div className="map-camera-points">
-                        <div className="map-camera-point" style={styles.camera1}></div>
-                        <div className="map-camera-point" style={styles.camera2}></div>
+                        {
+                            cameras.map((camera) => (
+                                <div className="map-camera-point" style={camera.position} key={camera.name}>
+                                    <button className="map-camera-point-btn" onClick={() => console.log(camera.name)}></button>
+                                    <div className="map-camera-point-label">{camera.name}</div>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
 
@@ -47,12 +62,12 @@ class MapView extends Component {
 
 const styles = {
     camera1: {
-        top: 400,
-        left: 305,
+        top: 408,
+        left: 313,
     },
     camera2: {
-        top: 360,
-        left: 1060,
+        top: 368,
+        left: 1068,
     },
 };
 
