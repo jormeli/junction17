@@ -1,0 +1,94 @@
+// COLORS
+// ====================
+
+$red: #e74c3c;
+$green: #1db954;
+$green-bright: #1ed760;
+$blue: #07A0C3;
+$black: #111;
+$silver: #E3E3E3;
+$dark-grey: #252525;
+$light-grey: #F5F5F5;
+
+
+@function colorscale($color, $level: 0) {
+    @return lighten($color, $level * 20%);
+}
+
+@function greyscale($level) {
+    @return colorscale($black, $level);
+}
+
+// Semantic color names
+$primary-color: $green;
+$bright-primary-color: $green-bright;
+$secondary-color: $blue;
+
+$error-color: $red; // This probably needs to change
+$success-color: $green;
+$disabled-color: greyscale(4);
+
+$site-background-color: white;
+
+// TYPOGRAPHY
+// ====================
+
+$base-font-size: 1rem;
+$base-line-height: $base-font-size * 1.2;
+$small-line-height: $base-line-height / 2;
+$large-line-height: $base-line-height * 2;
+
+// Typefaces
+$base-font: "Proxima Nova", sans-serif;
+$heading-font: "Montserrat", sans-serif;
+
+$type-scale-ratio: 1.2;
+
+// Type scale
+@function ts($level: 0) {
+    @if ($level < 0) {
+        @return $base-font-size / $level;
+    }
+    @return $base-font-size * $level;
+}
+
+// Colors
+$base-text-color: $dark-grey;
+$link-text-color: $blue;
+
+// LAYOUT
+// ====================
+
+// Breakpoints
+// TODO
+
+// Sizes
+$base-content-width: 1180px;
+
+// OTHER
+// ====================
+
+// Borders
+$border-color: greyscale(3);
+$border-hover-color: greyscale(4);
+$border-focus-color: greyscale(2);
+
+$base-border-radius: 0;
+$base-border: 1px solid $border-color;
+
+
+// Shadows
+$base-box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+
+// Transition
+$transitionLength: (
+    -2: 0.025s,
+    -1: 0.05s,
+    0: 0.1s,
+    1: 0.15s,
+    2: 0.3s
+);
+
+@function transition-length($level) {
+    @return map-get($transitionLength, $level);
+}
