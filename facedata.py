@@ -4,9 +4,13 @@ from datetime import datetime
 import numpy as np
 from PIL import Image
 from annoy import AnnoyIndex
+from scipy.spatial.distance import cosine
+from sklearn import cluster
+from sklearn import metrics
 
 IMAGE_SIZE = (128, 128)
 GET_N = 1000
+SIMILARITY_CUTOFF = 0.1
 
 class Spotting(object):
     def __init__(self, dbid, # int
@@ -95,6 +99,13 @@ class FaceData(object):
         # builds the annoy index. After building searches can be made, no more items can be added.
         self.annoy_index.build(10)
 
+    def count_uniques(self):
+        vectors = np.stack([f.vector for f in self.getall()])
+        dbscan = cluster.DBSCAN(eps=SIMILARITY_CUTOFF, metric='precomputed')
+        dima = metrics.pairwise.cosine_distances(vectors)
+        labels = dbscan.fit_predict(dima)
+        return max(labels)
+
 def create_dummy(i):
     vector = np.random.randn(128)
     image = Image.fromarray(np.random.randn(*IMAGE_SIZE))
@@ -108,7 +119,7 @@ if __name__ == '__main__':
         largest_id = max([item.dbid for item in all_items])
     except ValueError:
         largest_id = 0
-    dummy_items = [create_dummy(i) for i in range(largest_id + 1, largest_id + 100)]
+    dummy_items = [create_dummy(i) for i in range(largest_id + 1, largest_id + 10)]
     for item in dummy_items:
         face_data.insert(item)
 
@@ -119,8 +130,10 @@ if __name__ == '__main__':
         nearest_item_ids = [n.dbid for n in nearest]
         print('nearest items: ', nearest_item_ids)
 
-    cursor = face_data.connection.cursor()
-    cursor.execute("DELETE FROM spotting WHERE location='test';")
+    face_data.count_uniques()
+
+    # cursor = face_data.connection.cursor()
+    # cursor.execute("DELETE FROM spotting WHERE location='test';")
 
 
 
