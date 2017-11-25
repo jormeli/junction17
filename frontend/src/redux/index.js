@@ -1,19 +1,17 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 
-import cameras from './cameras';
-import {
-    watchFetchMapData
-} from './cameras';
-
-// TODO: import reducers here, combine and export as AppReducer
+import cameras, { watchFetchMapData } from './cameras';
+import leaderboard, { watchFetchLeaderboard } from './leaderboard';
 
 export default combineReducers({
-    cameras
+    cameras,
+    leaderboard
 });
 
 export function* appSaga() {
     yield all([
-        watchFetchMapData()
+        watchFetchMapData(),
+        watchFetchLeaderboard()
     ]);
 }
