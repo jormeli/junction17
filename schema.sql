@@ -1,7 +1,7 @@
 
 CREATE TABLE spotting(
     id PRIMARY KEY,
-    vector_hash UNIQUE VARCHAR,
+    vector_hash VARCHAR,
     vector BLOB,
     created_at DATETIME,
     spotted_at DATETIME,
@@ -9,5 +9,4 @@ CREATE TABLE spotting(
     location VARCHAR
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS vector_hash_index ON
-    spotting(vector_hash);
+CREATE UNIQUE INDEX IF NOT EXISTS vector_hash_index ON spotting(vector_hash);
