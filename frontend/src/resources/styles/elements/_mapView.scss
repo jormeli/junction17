@@ -20,13 +20,39 @@
 
 .map-camera-points {}
 
-.map-camera-point {
+.map-camera-point.map-camera-point {
     position: absolute;
+    width: 20%;
+}
+
+.map-camera-point-btn.map-camera-point-btn {
     width: 15px;
     height: 15px;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    border: none;
     background-color: $green;
     border-radius: 2px;
+
+    &:hover {
+        background-color: lighten($green, 15%);
+        cursor: pointer;
+    }
 }
+
+.map-camera-point-label {
+    // display: none;
+    position: absolute;
+    left: 15px;
+    bottom: 30px;
+    padding: .5rem;
+    background-color: white;
+    border-radius: 2px;
+}
+
+// .map-camera-point-btn:hover > .map-camera-point-label {
+//     display: block;
+// }
 
 .map-camera-video {
     height: 400px;
