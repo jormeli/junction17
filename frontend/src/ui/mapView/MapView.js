@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PersonList from '../common/personList';
+
 class MapView extends Component {
     componentWillMount() {
         // trigger fetching map data
@@ -19,6 +21,7 @@ class MapView extends Component {
 
                 <div className="map-right-column">
                     <div className="map-camera-video"></div>
+
                     <div className="map-camera-stats">
                         <h2>Eteisen kamera</h2>
                         <ul className="map-camera-stats-list">
@@ -31,7 +34,11 @@ class MapView extends Component {
                                 <span className="map-camera-stat-value">63</span>
                             </li>
                         </ul>
+
+                        <h3>Most spotted</h3>
+                        <PersonList />
                     </div>
+
                 </div>
             </div>
         );

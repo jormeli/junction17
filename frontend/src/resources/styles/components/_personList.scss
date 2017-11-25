@@ -1,0 +1,40 @@
+.person-list-wrapper {
+}
+
+.person-list {
+    @extend %neutral-list;
+
+}
+
+.person-list-entry {
+    height: $base-line-height * 3;
+    display: flex;
+
+    &:not(:last-of-type) {
+        margin-bottom: $small-line-height;
+    }
+}
+
+.person-list-entry-img {
+    height: 100%;
+}
+
+.person-list-entry-texts {
+    display: inline-flex;
+    justify-content: space-between;
+    flex: 1;
+    align-items: center;
+    padding: 0 $base-line-height;
+    font-size: ts(2);
+    background-color: #EEE  ;
+}
+
+.person-list-entry-id {
+}
+
+.person-list-entry-spotted {
+}
+
+.person-list-entry-spotted-icon {
+    height: ts(1);
+}

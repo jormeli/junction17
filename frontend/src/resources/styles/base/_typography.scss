@@ -16,8 +16,17 @@ h3 {
     font-weight: 400;
 }
 
+h2,
+h3 {
+    text-align: center;
+}
+
 h2 {
     margin: $base-line-height 0 $large-line-height;
     font-size: ts(3);
-    text-align: center;
+}
+
+h3 {
+    margin: $base-line-height 0 $base-line-height;
+    font-size: ts(2);
 }
