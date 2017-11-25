@@ -1,40 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-  componentWillMount() {
-    fetch('/api/uniques', {headers: {'Accept': 'application/json'}}).then((response) => {
-      response.json().then((json) => {
-        console.log(json);
-        this.setState({
-          facedata: json
-        })
-      });
-    })
-  }
-  render() {
-    var title;
-    if (this.state.facedata) {
-      title = <h1>{ this.state.facedata.uniques } unique visitors today.</h1>;
-    } else {
-      title = <h1>Loading...</h1>;
-    }
-    return (
-      <div className="App">
-        <header>
-          <h2>Peopletracker</h2>
-        </header>
-        <div class="container">
-          {title}
-        </div>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <header className="App-header">
+      <h1 className="App-title">Welcome to React</h1>
+    </header>
+    <p className="App-intro">
+      To get started, edit <code>src/App.js</code> and save to reload.
+    </p>
+  </div>
+);
 
 export default App;
+
+
+// fetch('/api/index', {headers: {'Accept': 'application/json'}})
+    // .then((response) => {
+    //   if (response.ok) {
+    //     return response.json();
+    //   } else {
+    //     throw Error();
+    //   }
+    //   .then(data => this.setState({ facedata: data }))
+      // response.json().then((json) => {
+      //   console.log(json);
+      //   this.setState({
+      //     facedata: json
+      //   })
+      // });
+    // })
