@@ -10,11 +10,18 @@ import {
 } from '../ui/mapView/actions';
 
 const initialState = {
-    data: null
+    data: null,
+    error: null
 };
 
 const cameras = (state = initialState, action) => {
     switch (action.type) {
+        case MAP_DATA_FETCH_FAIL:
+            return {
+                ...state,
+                error: 'Something went wrong'
+            };
+
         case MAP_DATA_FETCH_SUCCESS:
             return {
                 ...state,
