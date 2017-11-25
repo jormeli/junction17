@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class MapView extends Component {
     componentWillMount() {
-        // TODO: dispatch here
+        // trigger fetching map data
         this.props.mapDataFetch();
     }
 

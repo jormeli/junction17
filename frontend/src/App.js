@@ -8,6 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import './resources/styles/styles.scss';
 
 import MapView from './ui/mapView';
+import Leaderboard from './ui/leaderboard';
 
 import AppReducer, { appSaga } from './redux';
 
@@ -19,7 +20,6 @@ const store = createStore(
   )
 );
 
-// TODO: run saga
 sagaMiddleware.run(appSaga);
 
 const App = () => (
@@ -27,26 +27,10 @@ const App = () => (
     <Router>
       <div className="page-wrap">
         <Route exact path="/" component={MapView} />
+        <Route path="/leaderboard" component={Leaderboard} />
       </div>
     </Router>
   </Provider>
 );
 
 export default App;
-
-
-// fetch('/api/index', {headers: {'Accept': 'application/json'}})
-    // .then((response) => {
-    //   if (response.ok) {
-    //     return response.json();
-    //   } else {
-    //     throw Error();
-    //   }
-    //   .then(data => this.setState({ facedata: data }))
-      // response.json().then((json) => {
-      //   console.log(json);
-      //   this.setState({
-      //     facedata: json
-      //   })
-      // });
-    // })
