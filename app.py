@@ -33,3 +33,9 @@ def people():
 def by_location(location):
     grouped = face_data.grouped_by_location(location)
     return flask.json.jsonify(jsonify_grouped(grouped))
+
+@app.route('/api/image/<dbid>')
+def get_image(dbid):
+    spotting = face_data.get_by_id(dbid)
+    return flask.json.jsonify(spotting.encode_picture())
+

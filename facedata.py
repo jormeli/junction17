@@ -63,7 +63,6 @@ class Spotting(object):
     def tojson(self):
         return {
         'id': self.dbid,
-        'picture': self.encode_picture(),
         'spotted_at': self.spotted_at,
         'location': self.location
         }
@@ -111,6 +110,11 @@ class FaceData(object):
         cursor = self.connection.cursor()
         items = cursor.execute("SELECT * FROM spotting;")
         return [Spotting.fromdata(data) for data in items]
+
+    def get_by_id(self, dbid):
+        cursor = self.connection.cursor()
+        data = cursor.execute('SELECT * FROM spotting WHERE id = ?;', (int(dbid),)).fetchone()
+        return Spotting.fromdata(data)
 
     def find_by_location(self, location):
         cursor = self.connection.cursor()
