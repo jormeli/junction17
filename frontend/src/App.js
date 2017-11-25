@@ -7,21 +7,26 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import './resources/styles/styles.scss';
 
+import MapView from './ui/mapView';
+
+import AppReducer, { appSaga } from './redux';
+
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
-  () => {},
+  AppReducer,
   composeWithDevTools(
     applyMiddleware(sagaMiddleware)
   )
 );
 
 // TODO: run saga
+sagaMiddleware.run(appSaga);
 
 const App = () => (
-  <Provider store={{}}>
+  <Provider store={store}>
     <Router>
       <div className="page-wrap">
-        <Route exact path="/" component={() => <div>jee</div>} />
+        <Route exact path="/" component={MapView} />
       </div>
     </Router>
   </Provider>
