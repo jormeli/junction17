@@ -40,7 +40,7 @@ class Spotting(object):
 
 class FaceData(object):
     def __init__(self):
-        self.connection = sqlite3.connect('example.db')
+        self.connection = sqlite3.connect('junction17.db')
 
     def insert(self, spotting):
         c = self.connection.cursor()
