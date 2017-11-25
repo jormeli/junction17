@@ -62,8 +62,17 @@ const leaderboardFetcher = () => (
             throw Error();
         }
     })
+    .then(data => mapToLeaderboard(data))
     .catch(err => {
         console.error(err);
         throw Error();
     })
 );
+
+const mapToLeaderboard = data => ({
+    rawData: data,
+    computedData: Object.keys(data)
+        .filter(key => key !== '-1')
+        .sort((a, b) => data[a].length < data[b].length)
+        .map(key => data[key])
+});

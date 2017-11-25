@@ -1,4 +1,9 @@
 import { connect } from 'react-redux';
 import PersonList from './PersonList';
+import { leaderboardFetch } from '../../leaderboard/actions';
 
-export default connect(null, null)(PersonList);
+const mapStateToProps = state => ({
+    data: state.leaderboard.data
+});
+
+export default connect(mapStateToProps, { leaderboardFetch })(PersonList);
