@@ -9,6 +9,16 @@ from PIL import Image, ImageDraw
 face_detector = dlib.get_frontal_face_detector()
 face_pose_predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
 
+def get_faces_in_frame(frame):
+    faces = face_detector(frame)
+    bboxes = [(f.left(), f.top(), f.right(), f.bottom()) for f in faces]
+
+    
+
+    return bboxes
+
+
+
 #win = dlib.image_window()
 
 #img = np.array(Image.open('./group.jpg'))
