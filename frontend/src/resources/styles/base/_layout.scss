@@ -1,6 +1,4 @@
 .page-wrap {
-    // margin-top: $large-line-height;
-    background-color: $dark-grey;
     height: 100%;
 }
 
@@ -31,7 +29,7 @@
 .choice-option {
     margin: auto;
     // width: 100px;
-    
+
     &:not(:last-of-type) {
         margin-bottom: $large-line-height;
     }

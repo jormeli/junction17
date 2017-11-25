@@ -42,14 +42,15 @@ $large-line-height: $base-line-height * 2;
 $base-font: "Proxima Nova", sans-serif;
 $heading-font: "Montserrat", sans-serif;
 
-$type-scale-ratio: 1.2;
+$type-scale-ratio: 1.333;
 
 // Type scale
 @function ts($level: 0) {
-    @if ($level < 0) {
-        @return $base-font-size / $level;
-    }
-    @return $base-font-size * $level;
+    @return $base-font-size * pow($type-scale-ratio, $level);
+    // @if ($level < 0) {
+    //     @return $base-font-size / (1 + $level * $type-scale-ratio);
+    // }
+    // @return $base-font-size * (1 + $level * $type-scale-ratio);
 }
 
 // Colors

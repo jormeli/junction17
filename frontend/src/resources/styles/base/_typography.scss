@@ -11,13 +11,13 @@ h1,
 h2,
 h3 {
     margin: 0;
-    color: white;
     font-family: $heading-font;
     font-size: $base-font-size;
     font-weight: 400;
 }
 
-h1 {
-    margin-bottom: $large-line-height;
-    font-size: ts(2);
+h2 {
+    margin: $base-line-height 0 $large-line-height;
+    font-size: ts(3);
+    text-align: center;
 }
