@@ -6,7 +6,7 @@ app = Flask(__name__)
 face_data = FaceData()
 face_data.build()
 
-@app.route('/index')
+@app.route('/api/index')
 def index():
     uniques = face_data.count_uniques()
     return flask.json.jsonify({

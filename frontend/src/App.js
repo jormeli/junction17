@@ -3,6 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  componentWillMount() {
+    fetch('/api/index', {headers: {'Accept': 'application/json'}}).then((response) => {
+      response.json().then((json) => {
+        console.log(json);
+        this.setState({
+          facedata: json
+        })
+      });
+    })
+  }
   render() {
     return (
       <div className="App">
