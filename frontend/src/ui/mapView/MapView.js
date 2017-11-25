@@ -9,7 +9,27 @@ class MapView extends Component {
         this.props.mapDataFetch();
     }
 
+    countUniques(computedData, rawData) {
+        let count = 0;
+        computedData.map(el => count += 1);
+        count += rawData['-1'].length;
+        return count;
+    }
+
+    countTotalPeople(computedData, rawData) {
+        let count = 0;
+        computedData.map(el => count += el.length);
+        count += rawData['-1'].length;
+        return count;
+    }
+
     render() {
+        let uniques, totalPeople;
+
+        if (this.props.data) {
+            uniques = this.countUniques(this.props.data.computedData, this.props.data.rawData);
+            totalPeople = this.countTotalPeople(this.props.data.computedData, this.props.data.rawData);
+        }
 
         const cameras = [
             {
@@ -42,11 +62,15 @@ class MapView extends Component {
                         <ul className="map-camera-stats-list">
                             <li className="map-camera-stat">
                                 <span className="map-camera-stat-label">Ihmisiä nähty:</span>
-                                <span className="map-camera-stat-value">107</span>
+                                <span className="map-camera-stat-value">
+                                    {!totalPeople ? '...' : totalPeople}
+                                </span>
                             </li>
                             <li className="map-camera-stat">
                                 <span className="map-camera-stat-label">Uniikkeja ihmisiä nähty:</span>
-                                <span className="map-camera-stat-value">63</span>
+                                <span className="map-camera-stat-value">
+                                    {!uniques ? '...' : uniques}
+                                </span>
                             </li>
                         </ul>
 
