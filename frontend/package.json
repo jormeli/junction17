@@ -58,7 +58,7 @@
   },
   "proxy": {
     "/api": {
-      "target": "http://10.100.53.164:5000"
+      "target": "http://localhost:5000"
     }
   },
   "jest": {
@@ -73,7 +73,7 @@
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
     ],
     "testEnvironment": "node",
-    "testURL": "http://10.100.53.164:5000",
+    "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
