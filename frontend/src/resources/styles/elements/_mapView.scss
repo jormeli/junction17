@@ -60,16 +60,20 @@
 }
 
 .map-camera-stats {
-    position: relative;
     margin: 0 $base-line-height * 3;
 }
 
 .map-camera-selection-clear {
     position: absolute;
-    top: .5rem;
+    top: -0.7rem;
     left: .5rem;
     background-color: transparent !important;
     border: none !important;
+    transition: opacity transition-length(1);
+
+    &:hover {
+        opacity: 0.8;
+    }
 
     img {
         width: 100%;

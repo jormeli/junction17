@@ -91,32 +91,32 @@ class MapView extends Component {
                 <div className="map-right-column">
                     <div className="map-camera-video"></div>
 
-                    <div className="map-camera-stats">
+                    <div style={{ position: 'relative' }}>
+                        <div className="map-camera-stats">
+                            <button className="map-camera-selection-clear" onClick={() => console.log('asd')}>
+                                <img src={require('../../resources/images/icons/cross.png')} alt="" />
+                            </button>
 
-                        <button className="map-camera-selection-clear">
-                            <img src={require('../../resources/images/icons/cross.png')} alt="" />
-                        </button>
+                            <h2>{this.props.visibilityFilter ? this.props.visibilityFilter : 'All cameras'}</h2>
+                            <ul className="map-camera-stats-list">
+                                <li className="map-camera-stat">
+                                    <span className="map-camera-stat-label">Ihmisiä nähty:</span>
+                                    <span className="map-camera-stat-value">
+                                        {!totalPeople ? '...' : totalPeople}
+                                    </span>
+                                </li>
+                                <li className="map-camera-stat">
+                                    <span className="map-camera-stat-label">Uniikkeja ihmisiä nähty:</span>
+                                    <span className="map-camera-stat-value">
+                                        {!uniques ? '...' : uniques}
+                                    </span>
+                                </li>
+                            </ul>
 
-                        <h2>{this.props.visibilityFilter ? this.props.visibilityFilter : 'All cameras'}</h2>
-                        <ul className="map-camera-stats-list">
-                            <li className="map-camera-stat">
-                                <span className="map-camera-stat-label">Ihmisiä nähty:</span>
-                                <span className="map-camera-stat-value">
-                                    {!totalPeople ? '...' : totalPeople}
-                                </span>
-                            </li>
-                            <li className="map-camera-stat">
-                                <span className="map-camera-stat-label">Uniikkeja ihmisiä nähty:</span>
-                                <span className="map-camera-stat-value">
-                                    {!uniques ? '...' : uniques}
-                                </span>
-                            </li>
-                        </ul>
-
-                        <h3>Most spotted</h3>
-                        <PersonList />
+                            <h3>Most spotted</h3>
+                            <PersonList />
+                        </div>
                     </div>
-
                 </div>
             </div>
         );
