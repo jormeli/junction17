@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 
 class PersonList extends Component {
     componentDidMount() {
-        // fetch here
-        this.props.leaderboardFetch();
+        // fetch here if data not in store
+        if (!this.props.data) {
+            this.props.leaderboardFetch();
+        }
     }
 
     render() {
@@ -18,7 +20,7 @@ class PersonList extends Component {
             <div className="person-list-wrapper">
                 <ul className="person-list">
                     {
-                        computedData.slice(3).map((person, i) => (
+                        computedData.slice(0, 3).map((person, i) => (
                             <li className="person-list-entry" key={i}>
                                 <img className="person-list-entry-img" src={require('../../../resources/images/placeholder.png')} alt="kuva" />
                                 <div className="person-list-entry-texts">
