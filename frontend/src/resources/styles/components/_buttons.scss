@@ -1,0 +1,83 @@
+%neutral-button {
+    border: none;
+}
+
+// HELPERS
+@mixin button-bg($bg) {
+  background: $bg;
+  transition: all 0.15s ease;
+  &:hover {
+    background: darken($bg, 8%);
+    transition: all 0.3s ease;
+  }
+  &:active {
+    background: darken($bg, 15%);
+    outline: none;
+  }
+  &:focus {
+      outline: none;
+  }
+}
+
+// CLASSES
+.btn {
+    display: inline-block;
+    box-sizing: border-box;
+    
+    width: 100%;
+    max-width: 200px;
+    padding: $base-line-height 0;
+    border-radius: $base-line-height * 5 !important;
+    font-weight: 700;
+
+    border: none;
+    color: white;
+    font-family: $base-font;
+    font-size: ts(1);
+    line-height: 1;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-full-width {
+    display: block;
+    max-width: 10000px;
+    width: 100%;
+}
+
+.btn-primary {  
+    @include button-bg($primary-color);
+    color: white;
+
+    &:hover,
+    &:active {
+        background: $bright-primary-color !important;
+    }
+}
+
+.btn-secondary {
+    @include button-bg($secondary-color);
+}
+
+.btn-disabled,
+.btn:disabled {
+    background-color: $disabled-color;
+
+    &:hover {
+        background-color: $disabled-color;
+        cursor: default;
+    }
+
+    &:active,
+    &:focus {
+        background-color: $disabled-color;
+    }
+}
+
+.btn-row {
+    .btn {
+        &:not(:last-of-type) {
+            margin-right: $base-line-height;
+        }
+    }
+}

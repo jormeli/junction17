@@ -1,0 +1,90 @@
+.map-wrapper {
+    display: flex;
+    height: 100%;
+}
+
+.map-left-column {
+    display: relative;
+    width: 1300px;
+    height: 100%;
+    background-color: $black;
+}
+
+.map-right-column {
+    flex: 1;
+}
+
+.map-image {
+    width: 100%;
+}
+
+.map-camera-points {}
+
+.map-camera-point.map-camera-point {
+    position: absolute;
+    width: 20%;
+}
+
+.map-camera-point-btn.map-camera-point-btn {
+    width: 15px;
+    height: 15px;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    border: none;
+    background-color: $green;
+    border-radius: 2px;
+
+    &:hover {
+        background-color: lighten($green, 15%);
+        cursor: pointer;
+    }
+}
+
+.map-camera-point-label {
+    // display: none;
+    position: absolute;
+    left: 15px;
+    bottom: 30px;
+    padding: .5rem;
+    background-color: white;
+    border-radius: 2px;
+}
+
+// .map-camera-point-btn:hover > .map-camera-point-label {
+//     display: block;
+// }
+
+.map-camera-video {
+    height: 400px;
+    background-color: $silver;
+}
+
+.map-camera-stats {
+    margin: 0 $base-line-height * 3;
+}
+
+.map-camera-stats-list {
+    @extend %neutral-list;
+}
+
+.map-camera-stat {
+    display: flex;
+    justify-content: space-between;
+
+    &:not(:last-of-type) {
+        margin-bottom: $base-line-height;
+    }
+}
+
+.map-camera-stat-label,
+.map-camera-stat-value {
+    font-size: ts(1);
+}
+
+
+.map-camera-stat-label { }
+
+.map-camera-stat-value {
+    text-align: right;
+
+}

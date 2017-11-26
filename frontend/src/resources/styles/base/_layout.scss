@@ -1,0 +1,40 @@
+.page-wrap {
+    height: 100%;
+}
+
+.main-wrap {
+    margin: auto;
+    width: 95%;
+    max-width: $base-content-width;
+    height: 100%;
+}
+
+.choice-options-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.choice-options {
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.choice-option {
+    margin: auto;
+    // width: 100px;
+
+    &:not(:last-of-type) {
+        margin-bottom: $large-line-height;
+    }
+}
+
+.row {
+    margin-bottom: $large-line-height;
+}

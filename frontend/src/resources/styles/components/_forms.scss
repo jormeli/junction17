@@ -1,0 +1,134 @@
+// Browser consistency
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Removes leftover margin */
+}
+
+// Remove yellow background-color after autofill
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+%input-default {
+    box-sizing: border-box !important;
+    border: $base-border;
+    border-radius: $base-border-radius;
+    transition: transition-length(2);
+
+    &:not(.btn) {
+        border: none;
+        padding: $base-line-height;
+        font-size: $base-font-size;
+        font-weight: 700;
+        background-color: lighten($dark-grey, 20%);
+        color: white;
+    }
+
+    &:hover {
+        border-color: $border-hover-color;
+    }
+
+    &:focus,
+    &:active {
+        border-color: $border-focus-color;
+        outline: none;
+    }
+
+    &[type=search], &[type=text], &[type=number], &[type=email], &[type=tel] {
+        text-indent: .5rem;
+    }
+}
+
+form {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+input {
+    line-height: inherit;
+}
+
+textarea {
+    padding: .5rem;
+}
+
+input:not([type="file"]),
+button,
+select,
+textarea {
+    @extend %input-default;
+
+    &.input-full-width {
+        width: 100%;
+    }
+
+    &.input-large {
+        height: $base-line-height * 2;
+        padding: $small-line-height 0;
+    }
+}
+
+input[type="submit"] {
+    border: none;
+}
+
+.btn-submit {
+    margin: $base-line-height 0;
+    float: right;
+}
+
+.input-group {
+    display: inline-block;
+
+    // FIXME Name me
+    input {
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+.input-addon {
+    display: inline-block;
+    border: $base-border;
+    border-color: $secondary-color;
+    border-top-right-radius: $base-border-radius;
+    border-bottom-right-radius: $base-border-radius;
+    padding: 1px .3rem;
+    background-color: $secondary-color;
+    color: white;
+}
+
+.full-size-input-form {
+    width: 100%;
+    height: 100%;
+}
+
+.input-full-width {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.checkbox {
+    display: block;
+    margin-top: 1rem;
+}
+
+.checkbox__input {
+    padding-right: .5rem;
+}
+
+.checkbox__text {
+
+}
+
+.hidden {
+    display: none;
+}
