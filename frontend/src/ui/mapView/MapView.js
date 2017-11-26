@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { nameToPos } from '../../utilities/cameraFunctions';
+import {
+    locationsParse,
+    sightingsToScale,
+    sightingsToBlur,
+    sightingsToBrightness,
+} from '../../utilities/cameraFunctions';
 
 import PersonList from '../common/personList';
 
@@ -48,12 +53,15 @@ class MapView extends Component {
             totalPeople = this.countTotalPeople(computedData, rawData, visibilityFilter);
         }
 
-        const cameras = [
-            {
-                name: 'test',
-                position: nameToPos('Test'),
-            },
-        ];
+        const locationsRaw = {
+            'crowd': 1000,
+            'entrance': 400,
+        }
+
+        const cameras = locationsParse(locationsRaw);
+
+        const minSightings = cameras.reduce((min, cur) => cur.sightings < min ? cur.sightings : min, 100000);
+        const maxSightings = cameras.reduce((max, cur) => cur.sightings > max ? cur.sightings : max, -1);
 
         return (
             <div className="map-wrapper">
@@ -61,12 +69,21 @@ class MapView extends Component {
                     <img className="map-image" src={require('../../resources/images/junction_map.png')} alt="kartta" />
                     <div className="map-camera-points">
                         {
-                            cameras.map((camera) => (
-                                <div className="map-camera-point" style={camera.position} key={camera.name}>
-                                    <button className="map-camera-point-btn" onClick={() => console.log(camera.name)}></button>
-                                    <div className="map-camera-point-label">{camera.name}</div>
-                                </div>
-                            ))
+                            cameras.map((camera) => {
+                                return (
+                                    <div className="map-camera-point" style={camera.position} key={camera.name}>
+                                        <button
+                                            className="map-camera-point-btn"
+                                            style={{
+                                                filter: `blur(${sightingsToBlur(camera.sightings, minSightings, maxSightings)}) brightness(${sightingsToBrightness(camera.sightings, minSightings, maxSightings)})`,
+                                                transform: `scale(${sightingsToScale(camera.sightings, minSightings, maxSightings)})`,
+                                            }}
+                                            onClick={() => console.log(camera.name)}
+                                        ></button>
+                                        <div className="map-camera-point-label">{camera.name}</div>
+                                    </div>
+                                )
+                            })
                         }
                     </div>
                 </div>

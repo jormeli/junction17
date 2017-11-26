@@ -8,7 +8,7 @@ const Navbar = () => (
             className="nav-link nav-link--light"
             activeClassName="disable"
         >
-            <img className="nav-link-icon" src={require('../../resources/images/icons/arrow_left.png')} />
+            <img className="nav-link-icon" src={require('../../resources/images/icons/arrow_left.png')} alt="left"/>
             Leaderboard
         </NavLink>
         <NavLink
@@ -17,7 +17,7 @@ const Navbar = () => (
             className="nav-link nav-link--dark"
             activeClassName="disable"
         >
-            <img className="nav-link-icon" src={require('../../resources/images/icons/arrow_left_white.png')} />
+            <img className="nav-link-icon" src={require('../../resources/images/icons/arrow_left_white.png')} alt="left" />
             Map view
         </NavLink>
     </div>
