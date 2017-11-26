@@ -13,7 +13,7 @@ from sklearn import metrics
 
 IMAGE_SIZE = (160, 160)
 GET_N = 1000
-SIMILARITY_CUTOFF = 0.05
+SIMILARITY_CUTOFF = 0.32
 
 class Spotting(object):
     def __init__(self, dbid, # int
@@ -69,7 +69,10 @@ class Spotting(object):
 
     @classmethod
     def fromdata(cls, data):
-        vector = np.load(io.BytesIO(data[2]))
+        try:
+            vector = np.load(io.BytesIO(data[2]))
+        except TypeError:
+            import ipdb; ipdb.set_trace()
         image = Image.frombytes('RGB', IMAGE_SIZE, data[5])
         return cls(data[0], vector, data[3], data[4], image, data[6])
 
