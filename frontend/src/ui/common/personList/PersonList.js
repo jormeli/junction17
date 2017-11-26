@@ -18,7 +18,7 @@ class PersonList extends Component {
             <div className="person-list-wrapper">
                 <ul className="person-list">
                     {
-                        computedData.map((person, i) => (
+                        computedData.slice(3).map((person, i) => (
                             <li className="person-list-entry" key={i}>
                                 <img className="person-list-entry-img" src={require('../../../resources/images/placeholder.png')} alt="kuva" />
                                 <div className="person-list-entry-texts">

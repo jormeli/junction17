@@ -1,0 +1,40 @@
+.nav {
+    position: absolute;
+    top: $base-line-height;
+    left: $base-line-height;
+}
+
+.nav-link {
+    @extend %block-link;
+
+    display: flex;
+    align-items: center;
+    padding: $small-line-height $base-line-height;
+    padding-left: $small-line-height;
+    border-radius: 2px;
+    transition: opacity transition-length(1);
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.nav-link--dark,
+.nav-link--light {
+    &.disable {
+        display: none;
+    }
+}
+
+.nav-link--light {
+    background-color: white;
+}
+
+.nav-link--dark {
+    background-color: $dark-grey;
+    color: white;
+}
+
+.nav-link-icon {
+    height: ts(2);
+}
