@@ -4,11 +4,6 @@ import { nameToPos } from '../../utilities/cameraFunctions';
 import PersonList from '../common/personList';
 
 class MapView extends Component {
-    componentWillMount() {
-        // trigger fetching map data
-        // this.props.mapDataFetch();
-    }
-
     countUniques(computedData, rawData, visibilityFilter) {
         let count = 0;
         if (!visibilityFilter) {
