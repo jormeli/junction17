@@ -39,3 +39,10 @@ def get_image(dbid):
     spotting = face_data.get_by_id(dbid)
     return flask.json.jsonify(spotting.encode_picture())
 
+@app.route('/api/video-urls')
+def get_video_urls():
+    return flask.json.jsonify({
+        'test': 'https://www.youtube.com/embed/CDMN1aQ6I6c'
+    })
+
+

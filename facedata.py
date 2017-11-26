@@ -11,7 +11,7 @@ from sklearn import cluster
 from sklearn import metrics
 
 
-IMAGE_SIZE = (128, 128)
+IMAGE_SIZE = (160, 160)
 GET_N = 1000
 SIMILARITY_CUTOFF = 0.85
 
