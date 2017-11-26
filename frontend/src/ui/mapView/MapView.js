@@ -78,7 +78,7 @@ class MapView extends Component {
                                                 filter: `blur(${sightingsToBlur(camera.sightings, minSightings, maxSightings)}) brightness(${sightingsToBrightness(camera.sightings, minSightings, maxSightings)})`,
                                                 transform: `scale(${sightingsToScale(camera.sightings, minSightings, maxSightings)})`,
                                             }}
-                                            onClick={() => console.log(camera.name)}
+                                            onClick={() => this.props.setVisibilityFilter(camera.name)}
                                         ></button>
                                         <div className="map-camera-point-label">{camera.name}</div>
                                     </div>
@@ -92,7 +92,7 @@ class MapView extends Component {
                     <div className="map-camera-video"></div>
 
                     <div className="map-camera-stats">
-                        <h2>Eteisen kamera</h2>
+                        <h2>{this.props.visibilityFilter ? this.props.visibilityFilter : 'All cameras'}</h2>
                         <ul className="map-camera-stats-list">
                             <li className="map-camera-stat">
                                 <span className="map-camera-stat-label">Ihmisiä nähty:</span>
