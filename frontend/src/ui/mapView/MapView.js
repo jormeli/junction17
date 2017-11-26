@@ -92,6 +92,11 @@ class MapView extends Component {
                     <div className="map-camera-video"></div>
 
                     <div className="map-camera-stats">
+
+                        <button className="map-camera-selection-clear">
+                            <img src={require('../../resources/images/icons/cross.png')} alt="" />
+                        </button>
+
                         <h2>{this.props.visibilityFilter ? this.props.visibilityFilter : 'All cameras'}</h2>
                         <ul className="map-camera-stats-list">
                             <li className="map-camera-stat">

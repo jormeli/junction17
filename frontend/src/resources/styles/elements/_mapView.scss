@@ -60,7 +60,20 @@
 }
 
 .map-camera-stats {
+    position: relative;
     margin: 0 $base-line-height * 3;
+}
+
+.map-camera-selection-clear {
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    background-color: transparent !important;
+    border: none !important;
+
+    img {
+        width: 100%;
+    }
 }
 
 .map-camera-stats-list {
