@@ -93,7 +93,7 @@ class MapView extends Component {
 
                     <div className="map-camera-stats">
 
-                        <button className="map-camera-selection-clear">
+                        <button className="map-camera-selection-clear" onClick={() => this.props.setVisibilityFilter(null)}>
                             <img src={require('../../resources/images/icons/cross.png')} alt="" />
                         </button>
 
