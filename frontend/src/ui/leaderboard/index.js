@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
-import { leaderboardFetch } from './actions';
+import { leaderboardFetch, imageFetch } from './actions';
 import Leaderboard from './Leaderboard';
 
 const mapStateToProps = state => ({
-    data: state.leaderboard.data
+    data: state.leaderboard.data,
+    images: state.images
 });
 
 export default connect(
     mapStateToProps,
-    { leaderboardFetch }
+    { leaderboardFetch, imageFetch }
 )(Leaderboard);
