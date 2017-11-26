@@ -9,17 +9,44 @@ class MapView extends Component {
         this.props.mapDataFetch();
     }
 
-    countUniques(computedData, rawData) {
+    countUniques(computedData, rawData, visibilityFilter) {
         let count = 0;
-        computedData.map(el => count += 1);
-        count += rawData['-1'].length;
+        if (!visibilityFilter) {
+            computedData.map(el => count += 1);
+            count += rawData['-1'].length;
+        } else {
+            computedData.map(person => (
+                person.map(sighting => {
+                    if (sighting.location === visibilityFilter) count += 1;
+                })
+            ));
+
+            rawData['-1'].map(sighting => {
+                if (sighting.location === visibilityFilter) count += 1;
+            });
+        }
+
         return count;
     }
 
-    countTotalPeople(computedData, rawData) {
+    countTotalPeople(computedData, rawData, visibilityFilter) {
         let count = 0;
-        computedData.map(el => count += el.length);
-        count += rawData['-1'].length;
+        if (!visibilityFilter) {
+            computedData.map(el => count += el.length);
+            count += rawData['-1'].length;
+        } else {
+            computedData.map(person => {
+                // person.(sighting => {
+                //     if (sighting.location === visibilityFilter) count += 1;
+                // })
+                if (person.some(sighting => sighting.location === visibilityFilter)) count += 1;
+            });
+
+            rawData['-1'].map(sighting => {
+                if (sighting.location === visibilityFilter) count += 1;
+            });
+        }
+
         return count;
     }
 
@@ -27,8 +54,11 @@ class MapView extends Component {
         let uniques, totalPeople;
 
         if (this.props.data) {
-            uniques = this.countUniques(this.props.data.computedData, this.props.data.rawData);
-            totalPeople = this.countTotalPeople(this.props.data.computedData, this.props.data.rawData);
+            const { computedData, rawData } = this.props.data;
+            const { visibilityFilter } = this.props;
+
+            uniques = this.countUniques(computedData, rawData, visibilityFilter);
+            totalPeople = this.countTotalPeople(computedData, rawData, visibilityFilter);
         }
 
         const cameras = [

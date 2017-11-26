@@ -22,7 +22,7 @@ class PersonList extends Component {
                             <li className="person-list-entry" key={i}>
                                 <img className="person-list-entry-img" src={require('../../../resources/images/placeholder.png')} alt="kuva" />
                                 <div className="person-list-entry-texts">
-                                    <span className="person-list-entry-id">{i}</span>
+                                    <span className="person-list-entry-id">Person {i}</span>
                                     <span className="person-list-entry-spotted">
                                         <img className="person-list-entry-spotted-icon" src={require('../../../resources/images/icons/cross.png')} alt="kuva" />
                                         {person.length}

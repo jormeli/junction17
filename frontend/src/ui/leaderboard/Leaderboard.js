@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 class Leaderboard extends Component {
+    constructor() {
+        super();
+        this.state = {
+            activeIndex: 0
+        };
+    }
+
     componentDidMount() {
         // fetch data here
         this.props.leaderboardFetch();
@@ -10,64 +17,13 @@ class Leaderboard extends Component {
     render() {
         const { data, error } = this.props;
 
-        // if (!data && !error) {
-        //     return <div className="leaderboard-wrapper">Fetching...</div>;
-        // }
-        //
-        // if (error) {
-        //     return <div className="leaderboard-wrapper">Something went wrong</div>;
-        // }
+        if (!data && !error) {
+            return <div className="leaderboard-wrapper">Fetching...</div>;
+        }
 
-        const computedData = [
-            [
-                {
-                    id: 0,
-                    location: 'test',
-                    picture: image,
-                    spotted_at: '2017-11-25 16:10:10.289406',
-                },
-                {
-                    id: 0,
-                    location: 'test',
-                    picture: image,
-                    spotted_at: '2017-11-25 16:10:10.289406',
-                },
-                {
-                    id: 0,
-                    location: 'test',
-                    picture: image,
-                    spotted_at: '2017-11-25 16:10:10.289406',
-                },
-            ],
-            [
-                {
-                    id: 1,
-                    location: 'test',
-                    picture: image,
-                    spotted_at: '2017-11-25 16:10:10.289406',
-                },
-                {
-                    id: 1,
-                    location: 'test',
-                    picture: image,
-                    spotted_at: '2017-11-25 16:10:10.289406',
-                },
-                {
-                    id: 1,
-                    location: 'test',
-                    picture: image,
-                    spotted_at: '2017-11-25 16:10:10.289406',
-                },
-            ],
-            [
-                {
-                    id: 2,
-                    location: 'test',
-                    picture: image,
-                    spotted_at: '2017-11-25 16:10:10.289406',
-                }
-            ],
-        ]
+        if (error) {
+            return <div className="leaderboard-wrapper">Something went wrong</div>;
+        }
 
         let spottedData = [
             {
@@ -90,6 +46,8 @@ class Leaderboard extends Component {
             },
         ]
 
+        const { computedData } = data;
+
         return (
             <div className="leaderboard-wrapper">
                 <div className="leaderboard-column-left">
@@ -97,10 +55,10 @@ class Leaderboard extends Component {
                     <ul className="person-list">
                         {
                             computedData.map((person, i) => (
-                                <li className="person-list-entry person-list-entry--leaderboard" key={i} onClick={() => console.log('asd')}>
-                                    <img className="person-list-entry-img" src={"data:image/jpeg;" + person[0].picture} alt="" />
+                                <li className="person-list-entry person-list-entry--leaderboard" key={i} onClick={() => this.setState({ activeIndex: i })}>
+                                    <img className="person-list-entry-img" src={"data:image/jpeg;base64," + person[0].picture} alt="" />
                                     <div className="person-list-entry-texts person-list-entry-texts--leaderboard">
-                                        <span className="person-list-entry-id">{i}</span>
+                                        <span className="person-list-entry-id">Person {i}</span>
                                         <span className="person-list-entry-spotted">
                                             <img className="person-list-entry-spotted-icon" src={require('../../resources/images/icons/cross.png')} alt="kuva" />
                                             {person.length}
@@ -113,15 +71,15 @@ class Leaderboard extends Component {
                 </div>
 
                 <div className="leaderboard-column-right">
-                <h2>Spottings { spottedData.length > 0 ? ` - Person ${spottedData[0].id}` : ''}</h2>
+                <h2>Sightings { spottedData.length > 0 ? ` - Person ${this.state.activeIndex}` : ''}</h2>
                     <ul className="person-list">
                         {
-                            spottedData.map((spotted, i) => (
+                            computedData[this.state.activeIndex].map((spotted, i) => (
                                 <li className="person-list-entry person-list-entry--spotting" key={i}>
-                                    <img className="person-list-entry-img" src={"data:image/jpeg;" + spotted.picture} alt="" />
+                                    <img className="person-list-entry-img" src={"data:image/jpeg;base64," + spotted.picture} alt="" />
                                     <div className="person-list-entry-texts person-list-entry-texts--spotting">
-                                        <span className="person-list-entry-num">{i}</span>
-                                        <span className="person-list-entry-timestamp">{moment(spotted.spotted_at).format("MMM Do YY")}</span>
+                                        <span className="person-list-entry-num">Sighting {i}</span>
+                                        <span className="person-list-entry-timestamp">{moment(spotted.spotted_at).format("DD.MM.YYYY, HH:mm:ss")}</span>
                                     </div>
                                 </li>
                             ))
