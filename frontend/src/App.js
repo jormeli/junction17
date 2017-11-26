@@ -7,6 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import './resources/styles/styles.scss';
 
+import Navbar from './ui/navbar';
 import MapView from './ui/mapView';
 import Leaderboard from './ui/leaderboard';
 
@@ -14,23 +15,24 @@ import AppReducer, { appSaga } from './redux';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
-  AppReducer,
-  composeWithDevTools(
-    applyMiddleware(sagaMiddleware)
-  )
+    AppReducer,
+    composeWithDevTools(
+        applyMiddleware(sagaMiddleware)
+    )
 );
 
 sagaMiddleware.run(appSaga);
 
 const App = () => (
-  <Provider store={store}>
-    <Router>
-      <div className="page-wrap">
-        <Route exact path="/" component={MapView} />
-        <Route path="/leaderboard" component={Leaderboard} />
-      </div>
-    </Router>
-  </Provider>
+    <Provider store={store}>
+        <Router>
+            <div className="page-wrap">
+                <Navbar />
+                <Route exact path="/" component={MapView} />
+                <Route path="/leaderboard" component={Leaderboard} />
+            </div>
+        </Router>
+    </Provider>
 );
 
 export default App;
