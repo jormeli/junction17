@@ -155,6 +155,11 @@ class FaceData(object):
         grouped = self.group(items)
         return grouped
 
+    def locations_and_count(self):
+        cursor = self.connection.cursor()
+        count_location = cursor.execute("SELECT COUNT(id), location FROM spotting GROUP BY location;").fetchall()
+        return count_location
+
 
 def create_dummy(i):
     vector = np.random.randn(128)

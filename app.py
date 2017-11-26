@@ -31,7 +31,7 @@ def people():
 
 @app.route('/api/location/<location>')
 def by_location(location):
-    grouped = face_data.grouped_by_location(location)
+    grouped = face_data.find_by_location_grouped(location)
     return flask.json.jsonify(jsonify_grouped(grouped))
 
 @app.route('/api/image/<dbid>')
@@ -47,7 +47,9 @@ def get_video_urls():
 
 @app.route('/api/locations')
 def get_locations():
-    locations = [s.location for s in face_data.getall()]
-    locations = list(set(locations))
-    return flask.json.jsonify(locations)
+    locations_and_count = face_data.locations_and_count()
+    json = {}
+    for count, location in locations_and_count:
+        json[location] = count
+    return flask.json.jsonify(json)
 
