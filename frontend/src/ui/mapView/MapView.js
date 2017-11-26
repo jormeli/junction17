@@ -90,7 +90,7 @@ class MapView extends Component {
 
                 <div className="map-right-column">
                         <div style={{'textAlign': 'center'}}>
-                            <video width="500" height="800" autoplay="autoplay" loop="loop" style={{margin: 'auto' }}>
+                            <video width="500" height="700" autoplay="autoplay" loop="loop" style={{margin: 'auto' }}>
                             <source src="/video.mov" type="video/mp4" />
                             Your browser does not support the video tag.
                             </video>
