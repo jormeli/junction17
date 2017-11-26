@@ -11,7 +11,7 @@ from sklearn import cluster
 from sklearn import metrics
 
 
-IMAGE_SIZE = (128, 128)
+IMAGE_SIZE = (160, 160)
 GET_N = 1000
 SIMILARITY_CUTOFF = 0.85
 
@@ -116,6 +116,11 @@ class FaceData(object):
         data = cursor.execute('SELECT * FROM spotting WHERE id = ?;', (int(dbid),)).fetchone()
         return Spotting.fromdata(data)
 
+    def delete_id(self, dbid):
+        cursor = self.connection.cursor()
+        data = cursor.execute('DELETE FROM spotting WHERE id = ?;', (dbid,))
+        self.connection.commit()
+
     def find_by_location(self, location):
         cursor = self.connection.cursor()
         items = cursor.execute("SELECT * FROM spotting WHERE location=(?);", (location,))
@@ -149,6 +154,11 @@ class FaceData(object):
         items = self.find_by_location(location)
         grouped = self.group(items)
         return grouped
+
+    def locations_and_count(self):
+        cursor = self.connection.cursor()
+        count_location = cursor.execute("SELECT COUNT(id), location FROM spotting GROUP BY location;").fetchall()
+        return count_location
 
 
 def create_dummy(i):
