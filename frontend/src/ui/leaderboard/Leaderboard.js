@@ -16,30 +16,9 @@ class Leaderboard extends Component {
         }
     }
 
-    componentDidUpdate() {
-        if (this.props.data) {
-            if (this.props.computedData) {
-                this.props.data.computedData.map(m => (
-                    console.log(m),
-                    m.map(n => {
-                        console.log(n.id)
-                        this.props.imageFetch(n.id)
-                    }
-                )))
-            }
-        }
-    }
-
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.data) {
-    //         this.props.data.computedData.map(m => m.map(n =>     this.props.imageFetch(n.id))
-    //         )
-    //     }
-    // }
-
     render() {
         console.log(this.props)
-        const { data, error } = this.props;
+        const { data, error, images } = this.props;
 
         if (!data && !error) {
             return (
@@ -92,7 +71,7 @@ class Leaderboard extends Component {
                         {
                             computedData.map((person, i) => (
                                 <li className="person-list-entry person-list-entry--leaderboard" key={i} onClick={() => this.setState({ activeIndex: i })}>
-                                    {/* <img className="person-list-entry-img" src={"data:image/jpeg;base64," + person[0].picture} alt="" /> */}
+                                    {/* <img className="person-list-entry-img" src={"data:image/jpeg;base64," + person.picture} alt="" /> */}
                                     <div className="person-list-entry-texts person-list-entry-texts--leaderboard">
                                         <span className="person-list-entry-id">Person {i}</span>
                                         <span className="person-list-entry-spotted">
@@ -107,12 +86,13 @@ class Leaderboard extends Component {
                 </div>
 
                 <div className="leaderboard-column-right">
-                <h2>Sightings { spottedData.length > 0 ? ` - Person ${this.state.activeIndex}` : ''}</h2>
+                {/* <h2>Sightings { spottedData.length > 0 ? ` - Person ${this.state.activeIndex}` : ''}</h2> */}
+                <h2>Sightings {` - Person ${this.state.activeIndex}`}</h2>
                     <ul className="person-list">
                         {
                             computedData[this.state.activeIndex].map((spotted, i) => (
                                 <li className="person-list-entry person-list-entry--spotting" key={i}>
-                                    {/* <img className="person-list-entry-img" src={"data:image/jpeg;base64," + spotted.picture} alt="" /> */}
+                                    <img className="person-list-entry-img" src={"data:image/jpeg;base64," + images[spotted.id]} alt="" />
                                     <div className="person-list-entry-texts person-list-entry-texts--spotting">
                                         <span className="person-list-entry-num">Sighting {i}</span>
                                         <span className="person-list-entry-timestamp">{moment(spotted.spotted_at).format("DD.MM.YYYY, HH:mm:ss")}</span>

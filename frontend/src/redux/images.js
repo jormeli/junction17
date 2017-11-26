@@ -7,7 +7,8 @@ import {
 import {
     IMAGE_FETCH,
     IMAGE_FETCH_FAIL,
-    IMAGE_FETCH_SUCCESS
+    IMAGE_FETCH_SUCCESS,
+    LEADERBOARD_FETCH_SUCCESS
 } from '../redux/actionTypes';
 import { } from '../ui/leaderboard/actions';
 
@@ -36,24 +37,35 @@ export default images;
 
 // watcher saga
 export function* watchFetchImages() {
-    yield takeEvery(IMAGE_FETCH, fetchImage);
+    yield takeEvery(LEADERBOARD_FETCH_SUCCESS, fetchImages);
 }
 
-// worker saga
-function* fetchImage(action) {
+function* fetchImages() {
     try {
-        const computedData = yield select(state => state.leaderboard.data.computedData)
-        const payload = yield call(imageFetch, action.id);
+        const computedData = yield select(state => state.leaderboard.data.computedData);
+        yield computedData.map(m => (
+            m.map(function* (n) {
+                try {
+                    const image = yield call(imageFetcher, n.id);
+                    yield put(imageFetchSuccess(n.id, image));
+                } catch (e) {
+                    put(imageFetchFail(n.id));
+                }
+            }
+        )))
     } catch (e) {
         console.error(e);
-        yield put(imageFetchFail(action.id));
     }
 }
 
 const imageFetcher = (id) => (
-    fetch(`/api/images/${id}`)
+    fetch(`/api/image/${id}`)
     .then(res => {
-        console.log(res);
+        if (res.ok) {
+            return res.json();
+        } else {
+            throw Error();
+        }
     })
     .catch(err => {
         console.error(err);
