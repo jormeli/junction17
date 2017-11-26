@@ -45,4 +45,9 @@ def get_video_urls():
         'test': 'https://www.youtube.com/embed/CDMN1aQ6I6c'
     })
 
+@app.route('/api/locations')
+def get_locations():
+    locations = [s.location for s in face_data.getall()]
+    locations = list(set(locations))
+    return flask.json.jsonify(locations)
 
