@@ -3,7 +3,8 @@ import { takeEvery, put, call } from 'redux-saga/effects';
 import {
     LEADERBOARD_FETCH,
     LEADERBOARD_FETCH_FAIL,
-    LEADERBOARD_FETCH_SUCCESS
+    LEADERBOARD_FETCH_SUCCESS,
+    SET_VISIBILITY_FILTER
 } from './actionTypes';
 import {
     leaderboardFetchFail,
@@ -12,11 +13,18 @@ import {
 
 const initialState = {
     data: null,
-    error: null
+    error: null,
+    visibilityFilter: null
 };
 
 const leaderboard = (state = initialState, action) => {
     switch (action.type) {
+        case SET_VISIBILITY_FILTER:
+            return {
+                ...state,
+                visibilityFilter: action.visibilityFilter
+            };
+
         case LEADERBOARD_FETCH_FAIL:
             return {
                 ...state,
