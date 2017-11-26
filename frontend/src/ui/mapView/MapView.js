@@ -8,19 +8,12 @@ class MapView extends Component {
         let count = 0;
         if (!visibilityFilter) {
             computedData.map(el => count += 1);
-            if (rawData['-1']) count += rawData['-1'].length;
         } else {
             computedData.map(person => (
                 person.map(sighting => {
                     if (sighting.location === visibilityFilter) count += 1;
                 })
             ));
-
-            if (rawData['-1']) {
-                rawData['-1'].map(sighting => {
-                    if (sighting.location === visibilityFilter) count += 1;
-                });
-            }
         }
 
         return count;
@@ -30,17 +23,10 @@ class MapView extends Component {
         let count = 0;
         if (!visibilityFilter) {
             computedData.map(el => count += el.length);
-            if (rawData['-1']) count += rawData['-1'].length;
         } else {
             computedData.map(person => {
                 if (person.some(sighting => sighting.location === visibilityFilter)) count += 1;
             });
-
-            if (rawData['-1']) {
-                rawData['-1'].map(sighting => {
-                    if (sighting.location === visibilityFilter) count += 1;
-                });
-            }
         }
 
         return count;
