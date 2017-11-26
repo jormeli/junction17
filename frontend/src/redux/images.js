@@ -62,7 +62,7 @@ const imageFetcher = (id) => (
     fetch(`/api/image/${id}`)
     .then(res => {
         if (res.ok) {
-            return res.json();
+            return res.text();
         } else {
             throw Error();
         }
