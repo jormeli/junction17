@@ -10,3 +10,8 @@ export const LEADERBOARD_FETCH_FAIL = 'LEADERBOARD_FETCH_FAIL';
 
 // visibility filter for selecting cameras
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+
+// images
+export const IMAGE_FETCH = 'IMAGE_FETCH';
+export const IMAGE_FETCH_FAIL = 'IMAGE_FETCH_FAIL';
+export const IMAGE_FETCH_SUCCESS = 'IMAGE_FETCH_SUCCESS';

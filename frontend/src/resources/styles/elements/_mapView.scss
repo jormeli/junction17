@@ -7,7 +7,7 @@
     display: relative;
     width: 1300px;
     height: 100%;
-    background-color: $black;
+    background-color: #222323;
 }
 
 .map-right-column {
@@ -32,7 +32,7 @@
     padding: 0;
     border: none;
     background-color: $green;
-    border-radius: 2px;
+    border-radius: 50%;
 
     &:hover {
         background-color: lighten($green, 15%);
@@ -60,7 +60,20 @@
 }
 
 .map-camera-stats {
+    position: relative;
     margin: 0 $base-line-height * 3;
+}
+
+.map-camera-selection-clear {
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    background-color: transparent !important;
+    border: none !important;
+
+    img {
+        width: 100%;
+    }
 }
 
 .map-camera-stats-list {
