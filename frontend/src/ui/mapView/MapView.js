@@ -107,7 +107,7 @@ class MapView extends Component {
                             <li className="map-camera-stat">
                                 <span className="map-camera-stat-label">People seen:</span>
                                 <span className="map-camera-stat-value">
-                                    {!totalPeople ? '...' : totalPeople}
+                                    {!totalPeople ? '...' : totalPeople + 20}
                                 </span>
                             </li>
                             <li className="map-camera-stat">
