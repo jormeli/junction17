@@ -116,6 +116,11 @@ class FaceData(object):
         data = cursor.execute('SELECT * FROM spotting WHERE id = ?;', (int(dbid),)).fetchone()
         return Spotting.fromdata(data)
 
+    def delete_id(self, dbid):
+        cursor = self.connection.cursor()
+        data = cursor.execute('DELETE FROM spotting WHERE id = ?;', (dbid,))
+        self.connection.commit()
+
     def find_by_location(self, location):
         cursor = self.connection.cursor()
         items = cursor.execute("SELECT * FROM spotting WHERE location=(?);", (location,))
