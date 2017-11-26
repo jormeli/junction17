@@ -1,0 +1,50 @@
+.leaderboard-wrapper {
+    display: flex;
+    margin: 0 $large-line-height;
+}
+
+.leaderboard-column-left {
+    width: 40%;
+    margin-right: $large-line-height;
+}
+
+.leaderboard-column-right {
+    flex: 1;
+}
+
+.leaderboad-people-list,
+.leaderboad-spotted-list {
+    width: 100%;
+}
+
+.leaderboad-people-list {
+}
+
+.person-list-entry--leaderboard,
+.person-list-entry--spotting {
+    height: $base-line-height * 5 !important;
+
+    &:not(:last-of-type) {
+        margin-bottom: $base-line-height;
+    }
+}
+
+.person-list-entry--leaderboard {
+
+    &:hover {
+        cursor: pointer;
+
+        .person-list-entry-texts--leaderboard {
+            background-color: darken($silver, 10%);
+        }
+    }
+}
+
+.person-list-entry-texts--leaderboard,
+.person-list-entry-texts--spotting {
+    padding: 0 $large-line-height !important;
+}
+
+.leaderboad-spotted-list {
+
+}
