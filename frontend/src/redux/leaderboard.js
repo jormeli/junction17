@@ -83,4 +83,5 @@ const mapToLeaderboard = data => ({
         .filter(key => key !== '-1')
         .sort((a, b) => data[a].length < data[b].length)
         .map(key => data[key])
+        .concat(data['-1'].map(a => [a]))
 });
