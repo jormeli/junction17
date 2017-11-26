@@ -4,6 +4,10 @@ import { nameToPos } from '../../utilities/cameraFunctions';
 import PersonList from '../common/personList';
 
 class MapView extends Component {
+    componentDidMount() {
+        this.props.locationsFetch();
+    }
+
     countUniques(computedData, rawData, visibilityFilter) {
         let count = 0;
         if (!visibilityFilter) {
@@ -38,6 +42,7 @@ class MapView extends Component {
         if (this.props.data) {
             const { computedData, rawData } = this.props.data;
             const { visibilityFilter } = this.props;
+            // const visibilityFilter = 'entrance'
 
             uniques = this.countUniques(computedData, rawData, visibilityFilter);
             totalPeople = this.countTotalPeople(computedData, rawData, visibilityFilter);

@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import MapView from './MapView';
 import { mapDataFetch, setVisibilityFilter } from './actions';
+import { locationsFetch } from '../../redux/locations';
 
 // const getVisibilityFilter = state => state.visibilityFilter;
 // const getLeaderboard = state => state.data;
@@ -13,13 +14,15 @@ import { mapDataFetch, setVisibilityFilter } from './actions';
 
 const mapStateToProps = state => ({
     data: state.leaderboard.data,
-    visibilityFilter: state.leaderboard.visibilityFilter
+    visibilityFilter: state.leaderboard.visibilityFilter,
+    locations: state.locations.locations
 });
 
 export default connect(
     mapStateToProps,
     {
         mapDataFetch,
-        setVisibilityFilter
+        setVisibilityFilter,
+        locationsFetch
     }
 )(MapView);
