@@ -37,5 +37,5 @@ def by_location(location):
 @app.route('/api/image/<dbid>')
 def get_image(dbid):
     spotting = face_data.get_by_id(dbid)
-    return flask.json.jsonify(spotting.encode_picture())
+    return flask.Response(response=spotting.encode_picture(), status=200, content_type='text/ascii')
 

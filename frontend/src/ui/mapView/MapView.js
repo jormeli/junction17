@@ -9,16 +9,11 @@ import {
 import PersonList from '../common/personList';
 
 class MapView extends Component {
-    componentWillMount() {
-        // trigger fetching map data
-        this.props.mapDataFetch();
-    }
-
     countUniques(computedData, rawData, visibilityFilter) {
         let count = 0;
         if (!visibilityFilter) {
             computedData.map(el => count += 1);
-            count += rawData['-1'].length;
+            if (rawData['-1']) count += rawData['-1'].length;
         } else {
             computedData.map(person => (
                 person.map(sighting => {
@@ -26,9 +21,11 @@ class MapView extends Component {
                 })
             ));
 
-            rawData['-1'].map(sighting => {
-                if (sighting.location === visibilityFilter) count += 1;
-            });
+            if (rawData['-1']) {
+                rawData['-1'].map(sighting => {
+                    if (sighting.location === visibilityFilter) count += 1;
+                });
+            }
         }
 
         return count;
@@ -38,18 +35,17 @@ class MapView extends Component {
         let count = 0;
         if (!visibilityFilter) {
             computedData.map(el => count += el.length);
-            count += rawData['-1'].length;
+            if (rawData['-1']) count += rawData['-1'].length;
         } else {
             computedData.map(person => {
-                // person.(sighting => {
-                //     if (sighting.location === visibilityFilter) count += 1;
-                // })
                 if (person.some(sighting => sighting.location === visibilityFilter)) count += 1;
             });
 
-            rawData['-1'].map(sighting => {
-                if (sighting.location === visibilityFilter) count += 1;
-            });
+            if (rawData['-1']) {
+                rawData['-1'].map(sighting => {
+                    if (sighting.location === visibilityFilter) count += 1;
+                });
+            }
         }
 
         return count;
