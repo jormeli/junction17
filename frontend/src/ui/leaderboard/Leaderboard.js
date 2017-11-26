@@ -18,7 +18,19 @@ class Leaderboard extends Component {
         const { data, error } = this.props;
 
         if (!data && !error) {
-            return <div className="leaderboard-wrapper">Fetching...</div>;
+            return (
+                <div className="leaderboard-wrapper">
+                    <div className="leaderboard-column-left">
+                        <h2>People</h2>
+                        <ul className="person-list">Fetching...</ul>
+                    </div>
+
+                    <div className="leaderboard-column-right">
+                        <h2>Sightings</h2>
+                        <ul className="person-list">Fetching...</ul>
+                    </div>
+                </div>
+            );
         }
 
         if (error) {
