@@ -1,6 +1,28 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
+class Sighting extends Component {
+    constructor() {
+        super();
+        this.state = {};
+    }
+    componentWillMount() {
+        fetch('/api/image/' + this.props.spotted.id).then((response) => {
+            response.text().then((text) => {
+                this.setState({imageData: text })
+            });
+        });
+    }
+    render() {
+        return <li className="person-list-entry person-list-entry--spotting" key={this.props.index}>
+            <img className="person-list-entry-img" src={"data:image/jpeg;base64," + this.state.imageData} alt="" />
+            <div className="person-list-entry-texts person-list-entry-texts--spotting">
+                <span className="person-list-entry-num">Sighting {this.props.index}</span>
+                <span className="person-list-entry-timestamp">{moment(this.props.spotted.spotted_at).format("DD.MM.YYYY, HH:mm:ss")}</span>
+            </div>
+        </li>;
+    }
+}
 class Leaderboard extends Component {
     constructor() {
         super();
@@ -91,13 +113,7 @@ class Leaderboard extends Component {
                     <ul className="person-list">
                         {
                             computedData[this.state.activeIndex].map((spotted, i) => (
-                                <li className="person-list-entry person-list-entry--spotting" key={i}>
-                                    <img className="person-list-entry-img" src={"data:image/jpeg;base64," + images[spotted.id]} alt="" />
-                                    <div className="person-list-entry-texts person-list-entry-texts--spotting">
-                                        <span className="person-list-entry-num">Sighting {i}</span>
-                                        <span className="person-list-entry-timestamp">{moment(spotted.spotted_at).format("DD.MM.YYYY, HH:mm:ss")}</span>
-                                    </div>
-                                </li>
+                                <Sighting spotted={spotted} index={i} key={spotted.id} />
                             ))
                         }
                     </ul>
